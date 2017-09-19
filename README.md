@@ -8,8 +8,9 @@ and other Emacs packages.
 ## Configuration
 
 ```bash
-$ git clone https://github.com/bbatsov/prelude .emacs.d
-$ ln -s ~/prelude-personal/*.el ~/.emacs.d/personal/
+git clone https://github.com/bbatsov/prelude .emacs.d
+ln -s ~/prelude-personal/*.el ~/.emacs.d/personal/
+ln -s ~/prelude-personal/preload/*.el ~/.emacs.d/personal/preload/
 ```
 
 ## Go
