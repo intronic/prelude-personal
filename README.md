@@ -11,6 +11,7 @@ and other Emacs packages.
 git clone https://github.com/bbatsov/prelude .emacs.d
 ln -s ~/prelude-personal/*.el ~/.emacs.d/personal/
 ln -s ~/prelude-personal/preload/*.el ~/.emacs.d/personal/preload/
+ln -s ~/prelude-personal/lisp ~/.emacs.d/personal/
 ```
 
 ## Go
