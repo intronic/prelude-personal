@@ -1,3 +1,9 @@
+;;; init-desktop.el --- Init
+;;
+;;; Commentary:
+;;
+;;; Code:
+
 ;;; desktop-mode
 ;; from https://github.com/thisirs/dotemacs/blob/master/lisp/init-desktop.el
 
@@ -81,8 +87,9 @@
 ;; https://gist.github.com/vividsnow/0609b55bd684d325e7cb
 
 (defun desktop-load-theme ()
-  (load-theme (if (display-graphic-p) 'sanityinc-tomorrow-day 'sanityinc-tomorrow-night))) ; restore correct theme (day=gui night=terminal)
+   (load-theme (if (display-graphic-p) 'sanityinc-tomorrow-day 'sanityinc-tomorrow-night))) ; restore correct theme (day=gui night=terminal)
 
 (add-hook 'desktop-after-read-hook 'desktop-load-theme)
 
 (provide 'init-desktop)
+;;; init-desktop.el ends here
