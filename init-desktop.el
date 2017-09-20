@@ -81,7 +81,7 @@
 ;; https://gist.github.com/vividsnow/0609b55bd684d325e7cb
 
 (defun desktop-load-theme ()
-  (load-theme (display-graphic-p) 'sanityinc-tomorrow-day 'sanityinc-tomorrow-night)) ; restore correct theme (day=gui night=terminal)
+  (load-theme (if (display-graphic-p) 'sanityinc-tomorrow-day 'sanityinc-tomorrow-night))) ; restore correct theme (day=gui night=terminal)
 
 (add-hook 'desktop-after-read-hook 'desktop-load-theme)
 
