@@ -86,6 +86,16 @@
 (set-face-font 'default "Hack-11")
 (setq whitespace-line-column 120) ;; limit line length (override prelude default 80)
 
+
+(if (display-graphic-p)
+  (message "> graphic mode")
+  (message "> term mode"))
+(setq prelude-theme (if (display-graphic-p) 'solarized-light 'solarized-dark))
+(when (display-graphic-p)
+  (message "setting default alist")
+  (add-to-list 'default-frame-alist (cons 'height 60))
+  (add-to-list 'default-frame-alist (cons 'width 120)))
+
 ;; server
 (use-package server)
 (unless (server-running-p) (server-start))
