@@ -86,7 +86,7 @@
 (set-face-font 'default "Hack-11")
 (setq whitespace-line-column 120) ;; limit line length (override prelude default 80)
 
-
+;; set some gui stuff
 (if (display-graphic-p)
   (message "> graphic mode")
   (message "> term mode"))
@@ -109,7 +109,7 @@
             (define-key term-raw-map (kbd "C-y") 'term-paste)))
 
 ;; Github flavored markdown
-;(use-package gfm-mode)
+(use-package markdown-mode+)
 
 (setq dired-listing-switches "-laX")
 
@@ -123,68 +123,33 @@
 (display-time-mode 1)
 (setq display-time-default-load-average nil)
 
-;; (when t ;window-system
-;;   (require 'prelude-packages)
-;;   (scroll-bar-mode -1)
-;;   (prelude-require-package 'solarized-theme)
-;;   (setq prelude-theme 'solarized-light))
 
-;(prelude-require-packages '(solarized-theme))
+;; paredit for parinfer
+(unless (package-installed-p 'paredit)
+  (package-refresh-contents)
+  (package-install 'paredit))
 
-;; Solarized
-;; https://github.com/sellout/emacs-color-theme-solarized/pull/187
-;; (setq color-themes '())
-;; (use-package color-theme-sanityinc-solarized
-;;   :config
-;;   (load-theme 'solarized t)
-;;   :init
-;;   (add-hook 'after-make-frame-functions
-;;       (lambda (frame)
-;;         (let ((mode (if (display-graphic-p frame) 'light 'dark))
-;;               (set-frame-parameter frame 'background-mode mode)
-;;               (set-terminal-parameter frame 'background-mode mode))
-;;           (enable-theme 'solarized)))))
-
-;; Solarized
-;; https://github.com/sellout/emacs-color-theme-solarized/pull/187
-;; (setq color-themes '())
-;; (use-package color-theme-solarized
-;;   :config
-;;   (load-theme 'solarized t)
-;;   :init
-;;   (add-hook 'after-make-frame-functions
-;;       (lambda (frame)
-;;         (let ((mode (if (display-graphic-p frame) 'light 'light))
-;;               (set-frame-parameter frame 'background-mode mode)
-;;               (set-terminal-parameter frame 'background-mode mode))
-;;           (enable-theme 'solarized)))))
-
-;; ;; paredit for parinfer
-;; (unless (package-installed-p 'paredit)
-;;   (package-refresh-contents)
-;;   (package-install 'paredit))
-
-;; (unless (package-installed-p 'parinfer)
-;;   (package-refresh-contents)
-;;   (package-install 'parinfer))
-;; ;; parinfer
-;; (use-package parinfer
-;;   :ensure t
-;;   :bind
-;;   (("C-," . parinfer-toggle-mode))
-;;   :init
-;;   (progn
-;;     (setq parinfer-extensions
-;;           '(defaults       ; should be included.
-;;             pretty-parens  ; different paren styles for different modes.
-;;             paredit        ; Introduce some paredit commands.
-;;             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
-;;             smart-yank))   ; Yank behavior depend on mode.
-;;     (add-hook 'clojure-mode-hook #'parinfer-mode)
-;;     (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
-;;     (add-hook 'common-lisp-mode-hook #'parinfer-mode)
-;;     (add-hook 'scheme-mode-hook #'parinfer-mode)
-;;     (add-hook 'lisp-mode-hook #'parinfer-mode)))
+(unless (package-installed-p 'parinfer)
+  (package-refresh-contents)
+  (package-install 'parinfer))
+;; parinfer
+(use-package parinfer
+  :ensure t
+  :bind
+  (("C-," . parinfer-toggle-mode))
+  :init
+  (progn
+    (setq parinfer-extensions
+          '(defaults       ; should be included.
+             pretty-parens  ; different paren styles for different modes.
+             paredit        ; Introduce some paredit commands.
+             smart-tab      ; C-b & C-f jump positions and smart shift with tab & S-tab.
+             smart-yank))   ; Yank behavior depend on mode.
+    (add-hook 'clojure-mode-hook #'parinfer-mode)
+    (add-hook 'emacs-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'common-lisp-mode-hook #'parinfer-mode)
+    (add-hook 'scheme-mode-hook #'parinfer-mode)
+    (add-hook 'lisp-mode-hook #'parinfer-mode)))
 
 ;; ;; Install SHM & Intero - instead of prelude-haskell - http://commercialhaskell.github.io/intero/
 
@@ -247,3 +212,39 @@
 
 (provide 'mjp2)
 ;;; mjp2 ends here
+
+;; (when t ;window-system
+;;   (require 'prelude-packages)
+;;   (scroll-bar-mode -1)
+;;   (prelude-require-package 'solarized-theme)
+;;   (setq prelude-theme 'solarized-light))
+
+;(prelude-require-packages '(solarized-theme))
+
+;; Solarized
+;; https://github.com/sellout/emacs-color-theme-solarized/pull/187
+;; (setq color-themes '())
+;; (use-package color-theme-sanityinc-solarized
+;;   :config
+;;   (load-theme 'solarized t)
+;;   :init
+;;   (add-hook 'after-make-frame-functions
+;;       (lambda (frame)
+;;         (let ((mode (if (display-graphic-p frame) 'light 'dark))
+;;               (set-frame-parameter frame 'background-mode mode)
+;;               (set-terminal-parameter frame 'background-mode mode))
+;;           (enable-theme 'solarized)))))
+
+;; Solarized
+;; https://github.com/sellout/emacs-color-theme-solarized/pull/187
+;; (setq color-themes '())
+;; (use-package color-theme-solarized
+;;   :config
+;;   (load-theme 'solarized t)
+;;   :init
+;;   (add-hook 'after-make-frame-functions
+;;       (lambda (frame)
+;;         (let ((mode (if (display-graphic-p frame) 'light 'light))
+;;               (set-frame-parameter frame 'background-mode mode)
+;;               (set-terminal-parameter frame 'background-mode mode))
+;;           (enable-theme 'solarized)))))
