@@ -38,7 +38,9 @@
 ;; recent files
 (setq recentf-max-saved-items 256
       recentf-max-menu-items 16)
-(recentf-mode)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+(run-at-time nil (* 5 60) 'recentf-save-list)
+(recentf-mode 1)
 
 ;; turn off the beep
 (setq visible-bell t)
@@ -194,21 +196,28 @@
 ;;       haskell-process-args-ghci '("-I" "." "shell.nix" "--pure" "--command" "cabal configure; cabal repl"))
 
 
-;; (unless (package-installed-p 'intero)
-;;   (package-refresh-contents)
-;;   (package-install 'intero))
-;; (use-package intero
-;;   :init
-;;   (progn
-;;     (add-hook 'haskell-mode-hook 'intero-mode)
-;;     (add-hook 'haskell-mode-hook 'structured-haskell-mode))
-;;   :config
-;;   (progn
-;;     (subword-mode +1)
-;;     (eldoc-mode +1)
-;;     (haskell-indentation-mode nil)      ; for SHM
-;;     (interactive-haskell-mode +1)))
+;; Current nix env for intero:-
+;;
+;; $ nix-env -q --installed
+;; cabal-install-2.0.0.0
+;; cabal2nix-2.5
+;; hindent-5.2.3
+;; intero-nix-shim-0.1.2
+;; nix-1.11.14
+;; structured-haskell-mode-20170523-git
 
+(use-package intero
+  :init
+  (progn
+    (add-hook 'haskell-mode-hook 'intero-mode)
+    (add-hook 'haskell-mode-hook 'structured-haskell-mode))
+  :config
+  (progn
+    (setq intero-stack-executable "intero-nix-shim")     ; https://github.com/michalrus/intero-nix-shim
+    (subword-mode +1)
+    (eldoc-mode +1)
+    (haskell-indentation-mode nil)      ; for SHM
+    (interactive-haskell-mode +1)))
 
 (provide 'mjp2)
 ;;; mjp2 ends here
